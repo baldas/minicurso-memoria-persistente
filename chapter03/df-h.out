@@ -1,0 +1,10 @@
+###
+### Executing 'df -h' as a non-root user to see if
+###  any persistent memory filesystems are mounted.
+### This example shows two /dev/pmem* devices are mounted.
+###
+
+$ df -h /dev/pmem*
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/pmem0      1.5T   77M  1.4T   1% /mnt/pmemfs0
+/dev/pmem1      1.5T   77M  1.4T   1% /mnt/pmemfs1
