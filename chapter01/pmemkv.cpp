@@ -45,11 +45,10 @@ using std::endl;
 using std::string;
 
 /*
- * for this example, create a 1 Gig file
- * called "/daxfs/kvfile"
+ * for this example, create a 10MiB file
  */
-auto PATH = "/daxfs/kvfile";
-const uint64_t SIZE = 1024 * 1024 * 1024;
+  auto PATH = "/home/alexandro/Code/pmdk-minicurso-erad21/chapter01/storage.kv";    // <- change it as required
+const uint64_t SIZE = 1024 * 1024 * 10;
 
 /*
  * kvprint -- print a single key-value pair
@@ -85,21 +84,21 @@ int main() {
 
 	// open the key-value store, using the cmap engine
 	if (kv->open("cmap", std::move(cfg)) != status::OK) {
-		cerr << db::errormsg() << endl;
+		cerr << kv->db::errormsg() << endl;
 		exit(1);
 	}
 
 	// add some keys and values
 	if (kv->put("key1", "value1") != status::OK) {
-		cerr << db::errormsg() << endl;
+		cerr << kv->db::errormsg() << endl;
 		exit(1);
 	}
 	if (kv->put("key2", "value2") != status::OK) {
-		cerr << db::errormsg() << endl;
+		cerr << kv->db::errormsg() << endl;
 		exit(1);
 	}
 	if (kv->put("key3", "value3") != status::OK) {
-		cerr << db::errormsg() << endl;
+		cerr << kv->db::errormsg() << endl;
 		exit(1);
 	}
 
