@@ -51,7 +51,8 @@
 /* Using 4K of pmem for this example */
 #define PMEM_LEN 4096
 
-#define PATH "/pmem-fs/myfile"
+//#define PATH "/pmem-fs/myfile"
+#define PATH "/home/alexandro/Code/pmdk-minicurso-erad21/chapter06/manpage.dat"    // <- change it as required
 
 int
 main(int argc, char *argv[])
