@@ -41,7 +41,8 @@
 #include <libpmemobj.h>
 
 #define die(...) do {fprintf(stderr, __VA_ARGS__); exit(1);} while(0)
-#define POOL "/mnt/pmem/paintball"
+//#define POOL "/mnt/pmem/paintball"
+#define POOL "/home/alexandro/Code/pmdk-minicurso-erad21/chapter07/paintball"  // <- change if required
 #define LAYOUT "paintball"
 
 typedef uint32_t color;

@@ -40,7 +40,8 @@
 #include <libpmemobj.h>
 
 #define die(...) do {fprintf(stderr, __VA_ARGS__); exit(1);} while(0)
-#define POOL "/mnt/pmem/balance"
+//#define POOL "/mnt/pmem/balance"
+#define POOL "/home/alexandro/Code/pmdk-minicurso-erad21/chapter07/balance"  // <- change if required
 
 static PMEMobjpool *pool;
 
