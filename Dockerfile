@@ -31,7 +31,8 @@ RUN apt-get install -y \
       libpmemblk1 libpmemblk-dev libpmemblk1-debug \
       libpmemlog1 libpmemlog-dev libpmemlog1-debug \
       libpmempool1 libpmempool-dev libpmempool1-debug \
-      libpmemkv1 libpmemkv-dev
+      libpmemkv1 libpmemkv-dev \
+      pmdk-tools
 
 RUN mkdir /daxfs
 RUN chmod a+rwx /daxfs
