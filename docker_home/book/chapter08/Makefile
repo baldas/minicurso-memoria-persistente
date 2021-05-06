@@ -28,15 +28,11 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-# Makefile for chapter8 examples
-#
-
 .SUFFIXES: .lst
 
-all: transaction p allocation listings non_trivial_copy volatile_pointers queue containers
+all: queue
 
-listings: transaction.lst p.lst allocation.lst non_trivial_copy.lst volatile_pointers.lst persistent_queue.lst volatile_queue.lst queue.lst containers.lst
+listings: persistent_queue.lst queue.lst
 
 %.lst: %.cpp
 	cat -n $^ > $@
@@ -44,31 +40,13 @@ listings: transaction.lst p.lst allocation.lst non_trivial_copy.lst volatile_poi
 %.lst: %.hpp
 	cat -n $^ > $@
 
-transaction: transaction.cpp
-	$(CXX) -std=c++11 -o transaction transaction.cpp -lpmemobj
-
-p: p.cpp
-	$(CXX) -std=c++11 -o p p.cpp -lpmemobj
-
-allocation: allocation.cpp
-	$(CXX) -std=c++11 -o allocation allocation.cpp -lpmemobj
-
-non_trivial_copy: non_trivial_copy.cpp
-	$(CXX) -std=c++11 -c -o non_trivial_copy non_trivial_copy.cpp
-
-volatile_pointers: volatile_pointers.cpp
-	$(CXX) -std=c++11 -c -o volatile_pointers volatile_pointers.cpp
-
 queue: queue.cpp
 	$(CXX) -std=c++11 -o queue queue.cpp -lpmemobj
-
-containers: containers.cpp
-	$(CXX) -std=c++11 -o containers containers.cpp -lpmemobj
 
 clean:
 	$(RM) *.o core a.out
 
 clobber: clean
-	$(RM) transaction p allocation volatile_pointers queue non_trivial_copy containers *.lst
+	$(RM) queue *.lst
 
 .PHONY: all clean clobber listings
