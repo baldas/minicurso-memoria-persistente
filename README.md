@@ -17,6 +17,7 @@ Este material está licenciado pela [CC-BY-SA 4.0](https://creativecommons.org/l
 git clone git@github.com:baldas/minicurso-memoria-persistente.git
 …
 $ cd minicurso-memoria-persistente/
+$ git checkout eradrs-2022
 $ ./run_image.sh
 ...
 erad@docker-pmem:~$ cd pmdk/pmkv/
