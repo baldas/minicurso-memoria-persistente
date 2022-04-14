@@ -11,3 +11,20 @@ Este repositório foi criado pelos professores:
 
 Este material está licenciado pela [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR).
 
+## Smoke test
+
+```
+git clone git@github.com:baldas/minicurso-memoria-persistente.git
+…
+$ cd minicurso-memoria-persistente/
+$ ./run_image.sh
+...
+erad@docker-pmem:~$ cd pmdk/pmkv/
+erad@docker-pmem:pmkv$ make
+…
+erad@docker-pmem:~$ ./pmemkv
+key: key1 value: value1
+key: key3 value: value3
+key: key2 value: value2
+erad@docker-pmem:pmkv$
+```
