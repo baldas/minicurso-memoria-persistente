@@ -1,0 +1,112 @@
+     1	/*
+     2	 * Copyright (c) 2020, Intel Corporation
+     3	 *
+     4	 * Redistribution and use in source and binary forms, with or without
+     5	 * modification, are permitted provided that the following conditions
+     6	 * are met:
+     7	 *
+     8	 *     * Redistributions of source code must retain the above copyright
+     9	 *       notice, this list of conditions and the following disclaimer.
+    10	 *
+    11	 *     * Redistributions in binary form must reproduce the above copyright
+    12	 *       notice, this list of conditions and the following disclaimer in
+    13	 *       the documentation and/or other materials provided with the
+    14	 *       distribution.
+    15	 *
+    16	 *     * Neither the name of Intel Corporation nor the names of its
+    17	 *       contributors may be used to endorse or promote products derived
+    18	 *       from this software without specific prior written permission.
+    19	 *
+    20	 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+    21	 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+    22	 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+    23	 * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+    24	 * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+    25	 * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+    26	 * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+    27	 * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+    28	 * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    29	 * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+    30	 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    31	 */
+    32	
+    33	/*
+    34	 * pmemkv.cpp -- demonstrate a high-level key-value API for pmem
+    35	 */
+    36	
+    37	#include <iostream>
+    38	#include <cassert>
+    39	#include <libpmemkv.hpp>
+    40	
+    41	using namespace pmem::kv;
+    42	using std::cerr;
+    43	using std::cout;
+    44	using std::endl;
+    45	using std::string;
+    46	
+    47	/*
+    48	 * for this example, create a 10MiB file
+    49	 */
+    50	auto PATH = "/daxfs/storage.kv";    // <- change it as required
+    51	const uint64_t SIZE = 1024 * 1024 * 10;
+    52	
+    53	/*
+    54	 * kvprint -- print a single key-value pair
+    55	 */
+    56	int kvprint(string_view k, string_view v) {
+    57	    cout << "key: "    << k.data() <<
+    58	        " value: " << v.data() << endl;
+    59	    return 0;
+    60	}
+    61	
+    62	int main() {
+    63	    // start by creating the db object
+    64	    db *kv = new db();
+    65	    assert(kv != nullptr);
+    66	
+    67	    // create the config information for
+    68	    // libpmemkv's open method
+    69	    config cfg;
+    70	
+    71	    if (cfg.put_string("path", PATH) != status::OK) {
+    72	        cerr << pmemkv_errormsg() << endl;
+    73	        exit(1);
+    74	    }
+    75	    if (cfg.put_uint64("force_create", 1) != status::OK) {
+    76	        cerr << pmemkv_errormsg() << endl;
+    77	        exit(1);
+    78	    }
+    79	    if (cfg.put_uint64("size", SIZE) != status::OK) {
+    80	        cerr << pmemkv_errormsg() << endl;
+    81	        exit(1);
+    82	    }
+    83	
+    84	
+    85	    // open the key-value store, using the cmap engine
+    86	    if (kv->open("cmap", std::move(cfg)) != status::OK) {
+    87	        cerr << kv->db::errormsg() << endl;
+    88	        exit(1);
+    89	    }
+    90	
+    91	    // add some keys and values
+    92	    if (kv->put("key1", "value1") != status::OK) {
+    93	        cerr << kv->db::errormsg() << endl;
+    94	        exit(1);
+    95	    }
+    96	    if (kv->put("key2", "value2") != status::OK) {
+    97	        cerr << kv->db::errormsg() << endl;
+    98	        exit(1);
+    99	    }
+   100	    if (kv->put("key3", "value3") != status::OK) {
+   101	        cerr << kv->db::errormsg() << endl;
+   102	        exit(1);
+   103	    }
+   104	
+   105	    // iterate through the key-value store, printing them
+   106	    kv->get_all(kvprint);
+   107	
+   108	    // stop the pmemkv engine
+   109	    delete kv;
+   110	
+   111	    exit(0);
+   112	}
