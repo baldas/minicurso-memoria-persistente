@@ -1,6 +1,6 @@
-# Código ERAD-RS
+# Código ERAD-SP
 
-Código desenvolvido para uso no minicurso apresentado durante o ERAD-RS 2022.
+Código desenvolvido para uso no minicurso apresentado durante o ERAD-SP 2023.
 
 Para compilar, você precisa do pacote [PMDK](https://github.com/pmem/pmdk) instalado em sua máquina. Utilize o Makefile fornecido.
 
@@ -17,7 +17,7 @@ Este material está licenciado pela [CC-BY-SA 4.0](https://creativecommons.org/l
 git clone git@github.com:baldas/minicurso-memoria-persistente.git
 …
 $ cd minicurso-memoria-persistente/
-$ git checkout eradrs-2022
+$ git checkout eradsp-2023
 $ ./run_image.sh
 ...
 erad@docker-pmem:~$ cd pmdk/pmkv/
