@@ -4,6 +4,11 @@ Neste repositório você encontrará o material utilizado durante os minicursos 
 
 Neste curso, nós nos concentramos no uso da biblioteca Intel PMDK. Mais informações podem ser encontradas no branch de cada oferecimento cujos links estão abaixo:
 
+
+- [ERAD-SP 2023](https://sites.google.com/view/erad-sp2023/home)
+  - O repositório com todo o código utilizado [está aqui](../../tree/eradsp-2023), no branch `eradsp-2023`.
+
+
 - [ERAD-RS 2022](https://web.inf.ufpr.br/erad2022/)
   - O repositório com todo o código utilizado [está aqui](../../tree/eradrs-2022), no branch `eradrs-2022`.
 
