@@ -14,7 +14,7 @@ Este material está licenciado pela [CC-BY-SA 4.0](https://creativecommons.org/l
 ## Smoke test
 
 ```
-git clone git@github.com:baldas/minicurso-memoria-persistente.git
+git clone https://github.com/baldas/minicurso-memoria-persistente.git
 …
 $ cd minicurso-memoria-persistente/
 $ git checkout eradno2-2023
